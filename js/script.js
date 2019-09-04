@@ -7,9 +7,9 @@ $.ajax({
   type: 'GET',
   dataType: 'json',
   success:function(keys){
-    serverURL = keys['SERVER_URL'];
-    serverPort = keys['SERVER_PORT'];
-    url = `${keys['SERVER_URL']}:${keys['SERVER_PORT']}`;
+    serverURL = keys.SERVER_URL;
+    serverPort = keys.SERVER_PORT;
+    url = `${keys.SERVER_URL}:${keys.SERVER_PORT}`;
     showWorkCards();
   },
   error: function(){
@@ -38,7 +38,7 @@ showWorkCards = () => {
                           <a href="#" class="card-link">Delete</a>
                         </div>
                         </div>
-                        </div>`
+                        </div>`;
 
                         $("#workList").append(workCard);
       }
@@ -47,8 +47,8 @@ showWorkCards = () => {
       console.log(err);
       console.log('something went wrong with getting all the products');
     }
-  })
-}
+  });
+};
 
 $(document).ready(function(){
   console.log(sessionStorage);
@@ -142,7 +142,7 @@ $('#registerForm').submit(function(){
     console.log('your password does not match your confirm password');
   }else {
     $.ajax({
-      url: 'http://localhost:3000/users',
+      url: `${url}/users`,
       type: 'POST',
       data: {
         username: username,
@@ -170,7 +170,7 @@ $('#loginForm').submit(function(){
     console.log('please enter a password');
   }else {
     $.ajax({
-      url: 'http://localhost:3000/loginUser',
+      url: `${url}/loginUser`,
       type: 'POST',
       data: {
         username: username,
