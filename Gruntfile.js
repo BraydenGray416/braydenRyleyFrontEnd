@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
       jshint: {
-          files: ['js/*.js'],
+          files: ['js/*.js', '!js/*.min.js'],
           options: {
               esversion: 6
           }
