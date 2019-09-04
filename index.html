@@ -1,63 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Portfolio Work Database</title>
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h1>Portfolio Work Database</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <h3>Add Work</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <form>
-            <div class="form-group">
-              <label for="workTitle">Title</label>
-              <input type="text" class="form-control" id="workTitleInput">
-            </div>
-            <div class="form-group">
-              <label for="workImageURL">Image URL</label>
-              <input type="text" class="form-control" id="workImageURLInput">
-            </div>
-            <div class="form-group">
-              <label for="workAuthor">Author</label>
-              <input type="text" class="form-control" id="workAuthorInput">
-            </div>
-            <div class="form-group">
-              <label for="workURL">URL</label>
-              <input type="text" class="form-control" id="workURLInput">
-            </div>
-            <button type="submit" class="btn btn-primary" id="addWorkItemBtn">Submit</button>
-          </form>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <h3 class="mt-3">Work List</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div id="workList" class="list-group">
-
-          </div>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio Work Database</title>
+  <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Portfolio Work Database</h1>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <h3>Add Work</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <form>
+          <div class="form-group">
+            <label for="workTitle">Title</label>
+            <input type="text" class="form-control" id="workTitleInput">
+          </div>
+          <div class="form-group">
+            <label for="workImageURL">Image URL</label>
+            <input type="text" class="form-control" id="workImageURLInput">
+          </div>
+          <div class="form-group">
+            <label for="workAuthor">Author</label>
+            <input type="text" class="form-control" id="workAuthorInput">
+          </div>
+          <div class="form-group">
+            <label for="workURL">URL</label>
+            <input type="text" class="form-control" id="workURLInput">
+          </div>
+          <button type="submit" class="btn btn-primary" id="addWorkItemBtn">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h3 class="mt-3">Work List</h3>
+      </div>
+    </div>
+    <!-- <div class="row"> -->
+      <div id="workList" class="row">
 
-    <script src="node_modules\bootstrap\dist\js\bootstrap.min.js" charset="utf-8"></script>
-    <script src="node_modules\jquery\dist\jquery.min.js" charset="utf-8"></script>
-    <script src="node_modules\popper.js\dist\umd\popper.min.js" charset="utf-8"></script>
-    <script src="js/script.js" charset="utf-8"></script>
-  </body>
+      </div>
+    <!-- </div> -->
+  </div>
+
+
+  <script src="node_modules\jquery\dist\jquery.min.js" charset="utf-8"></script>
+  <script src="node_modules\popper.js\dist\umd\popper.min.js" charset="utf-8"></script>
+  <script src="node_modules\bootstrap\dist\js\bootstrap.min.js" charset="utf-8"></script>
+  <script src="js/script.js" charset="utf-8"></script>
+</body>
 </html>
