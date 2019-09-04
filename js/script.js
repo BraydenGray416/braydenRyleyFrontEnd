@@ -1,7 +1,7 @@
 $(document).ready(function(){
   console.log(sessionStorage);
 
-  if(sessionStorage['userName']){
+  if(sessionStorage.userName){
     console.log('you are now logged in');
     $('#modalBtn').hide();
     $('#logoutBtn').removeClass('d-none');
@@ -133,9 +133,9 @@ $('#loginForm').submit(function(){
           console.log('let us log you in');
           console.log(result);
 
-          sessionStorage.setItem('userID', result['_id']);
-          sessionStorage.setItem('userName', result['username']);
-          sessionStorage.setItem('userEmail', result['email']);
+          sessionStorage.setItem('userID', result._id);
+          sessionStorage.setItem('userName', result.username);
+          sessionStorage.setItem('userEmail', result.email);
           $('#authForm').modal('hide');
           $('#modalBtn').hide();
           $('#logoutBtn').removeClass('d-none');
