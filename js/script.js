@@ -7,9 +7,9 @@ $.ajax({
   type: 'GET',
   dataType: 'json',
   success:function(keys){
-    serverURL = keys['SERVER_URL'];
-    serverPort = keys['SERVER_PORT'];
-    url = `${keys['SERVER_URL']}:${keys['SERVER_PORT']}`;
+    serverURL = keys.SERVER_URL;
+    serverPort = keys.SERVER_PORT;
+    url = `${keys.SERVER_URL}:${keys.SERVER_PORT}`;
     showWorkCards();
   },
   error: function(){
@@ -38,7 +38,7 @@ showWorkCards = () => {
                           <a href="#" class="card-link">Delete</a>
                         </div>
                         </div>
-                        </div>`
+                        </div>`;
 
                         $("#workList").append(workCard);
       }
@@ -47,8 +47,8 @@ showWorkCards = () => {
       console.log(err);
       console.log('something went wrong with getting all the products');
     }
-  })
-}
+  });
+};
 
 $(document).ready(function(){
   console.log(sessionStorage);
