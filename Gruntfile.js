@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
       jshint: {
-          files: ['js/*.js', 'js/!*.min.js'],
+          files: ['js/*.js'],
           options: {
               esversion: 6
           }
@@ -39,6 +39,9 @@ module.exports = function(grunt) {
       my_target: {
         files: {
           'js/script.min.js': ['js/script.js']
+        },
+        options: {
+            esversion: 6
         }
       }
     }
@@ -50,7 +53,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify-es');
 
   grunt.registerTask('runWatch', ['watch']);
   grunt.registerTask('check', ['jshint', 'csslint']);
