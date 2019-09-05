@@ -27,7 +27,7 @@ showWorkCards = () => {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
 
-        let workCard = `<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center">
+        let workCard = `<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center" data-id=${data[i]._id}>
                         <div class="card h-100">
                         <div class="card-body">
                           <img src="${data[i].imageUrl}" class="card-img-top" alt="">
@@ -35,16 +35,16 @@ showWorkCards = () => {
                           <h6 class="card-subtitle mb-2 text-muted">${data[i].author}</h6>
                           <a href="${data[i].url}"><p class="card-text">Click here to check out the website!</p></a>`;
                           if(sessionStorage.username){
-                            if(sessionStorage.user_id === data[i].user_id){
-                            workCard += `<a href="#" class="card-link">Edit</a>
-                                          <a href="#" class="card-link">Delete</a>`;
+                            if(sessionStorage.userID === data[i].user_id){
+                            workCard += `<button type="button" class="btn btn-secondary">Edit</button>
+                                          <button type="button" class="btn btn-secondary">Delete</button>`;
                             }
                           }
                     workCard += `</div>
                                   </div>
                                   </div>`;
 
-                        $("#workList").append(workCard);
+          $("#workList").append(workCard);
       }
     },
     error: function(err){
@@ -104,10 +104,9 @@ $('#addWorkItemBtn').click(function(){
                             <img src="${result.imageUrl}" class="card-img-top" alt="">
                             <h5 class="card-title">${result.title}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${result.author}</h6>
-                            <a href="${result.url}"><p class="card-text">Click here to check out the website!</p></a><a href="#" class="card-link">Edit</a>
-                                            <a href="#" class="card-link">Delete</a></div>
-                                    </div>
-                                    </div>`);
+                            <a href="${result.url}"><p class="card-text">Click here to check out the website!</p></a>
+                            <button type="button" class="btn btn-secondary">Edit</button>
+                            <button type="button" class="btn btn-secondary">Delete</button></div></div></div>`);
       },
       error:function(err){
         console.log(err);
