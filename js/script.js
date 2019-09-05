@@ -33,12 +33,16 @@ showWorkCards = () => {
                           <img src="${data[i].imageUrl}" class="card-img-top" alt="">
                           <h5 class="card-title">${data[i].title}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">${data[i].author}</h6>
-                          <a href="${data[i].url}"><p class="card-text">Click here to check out the website!</p></a>
-                          <a href="#" class="card-link">Edit</a>
-                          <a href="#" class="card-link">Delete</a>
-                        </div>
-                        </div>
-                        </div>`;
+                          <a href="${data[i].url}"><p class="card-text">Click here to check out the website!</p></a>`;
+                          if(sessionStorage.username){
+                            if(sessionStorage.user_id === data[i].user_id){
+                            workCard += `<a href="#" class="card-link">Edit</a>
+                                          <a href="#" class="card-link">Delete</a>`;
+                            }
+                          }
+                    workCard += `</div>
+                                  </div>
+                                  </div>`;
 
                         $("#workList").append(workCard);
       }
@@ -57,6 +61,7 @@ $(document).ready(function(){
     console.log('you are now logged in');
     $('#modalBtn').hide();
     $('#logoutBtn').removeClass('d-none');
+    $('#addWorkSection').removeClass('d-none');
   }else {
     console.log('please sign in');
   }
@@ -85,16 +90,24 @@ $('#addWorkItemBtn').click(function(){
         imageUrl: workImageURL,
         author: workAuthor,
         url: workURL,
+        userId: sessionStorage.userID
       },
       success:function(result){
         $('#workTitleInput').val(null);
         $('#workImageURLInput').val(null);
         $('#workAuthorInput').val(null);
         $('#workURLInput').val(null);
-        console.log(workTitle);
-        console.log(workImageURL);
-        console.log(workAuthor);
-        console.log(workURL);
+        console.log(sessionStorage.userID);
+          $('#workList').append(`<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center">
+                          <div class="card h-100">
+                          <div class="card-body">
+                            <img src="${result.imageUrl}" class="card-img-top" alt="">
+                            <h5 class="card-title">${result.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${result.author}</h6>
+                            <a href="${result.url}"><p class="card-text">Click here to check out the website!</p></a><a href="#" class="card-link">Edit</a>
+                                            <a href="#" class="card-link">Delete</a></div>
+                                    </div>
+                                    </div>`);
       },
       error:function(err){
         console.log(err);
@@ -191,6 +204,7 @@ $('#loginForm').submit(function(){
           $('#authForm').modal('hide');
           $('#modalBtn').hide();
           $('#logoutBtn').removeClass('d-none');
+          $('#addWorkSection').removeClass('d-none');
         }
       },
       error:function(err){
@@ -206,4 +220,5 @@ $('#logoutBtn').click(function(){
   $('#modalBtn').show();
   $('#logoutBtn').addClass('d-none');
   console.log(sessionStorage);
+  $('#addWorkSection').addClass('d-none');
 });
