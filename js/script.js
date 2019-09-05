@@ -116,6 +116,38 @@ $('#addWorkItemBtn').click(function(){
   }
 });
 
+$('#workList').on('click', '.editBtn', function() {
+  event.preventDefault();
+  if (!sessionStorage.userId) {
+    alert('401, permission denied');
+    return;
+  }
+  const id = $(this).parent().parent().data('id');
+  $.ajax({
+    url: `${url}/work/${id}`,
+    type: 'post',
+    data: {
+      userId: sessionStorage.userId
+    },
+    dataType: 'json',
+    success:function(work){
+      console.log(work);
+      $('#workTitleInput').val(work.name);
+      $('#workImageURLInput').val(work.imageUrl);
+      $('#workAuthorInput').val(work.author);
+      $('#workURLInput').val(work.url);
+      $('#workID').val(work._id);
+      $('#addWorkItemBtn').text('Edit Work').addClass('btn-warning');
+      $('#heading').text('Edit Work');
+      editing = true;
+    },
+    error:function(err){
+      console.log(err);
+      console.log('something went wrong with getting the single product');
+    }
+  });
+});
+
 $('#modalBtn').click(function(){
   $('#authForm').modal('show');
 });
