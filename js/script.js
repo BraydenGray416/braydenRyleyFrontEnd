@@ -1,6 +1,7 @@
 let serverURL;
 let serverPort;
 let url;
+let editing = false;
 
 $.ajax({
   url: 'config.json',
@@ -34,10 +35,10 @@ showWorkCards = () => {
                           <h5 class="card-title">${data[i].title}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">${data[i].author}</h6>
                           <a href="${data[i].url}"><p class="card-text">Click here to check out the website!</p></a>`;
-                          if(sessionStorage.username){
+                          if(sessionStorage.userName){
                             if(sessionStorage.userID === data[i].user_id){
-                            workCard += `<button type="button" class="btn btn-secondary">Edit</button>
-                                          <button type="button" class="btn btn-secondary">Delete</button>`;
+                            workCard += `<button type="button" class="btn btn-secondary editBtn">Edit</button>
+                                          <button type="button" class="btn btn-secondary deleteBtn">Delete</button>`;
                             }
                           }
                     workCard += `</div>
@@ -105,8 +106,8 @@ $('#addWorkItemBtn').click(function(){
                             <h5 class="card-title">${result.title}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${result.author}</h6>
                             <a href="${result.url}"><p class="card-text">Click here to check out the website!</p></a>
-                            <button type="button" class="btn btn-secondary">Edit</button>
-                            <button type="button" class="btn btn-secondary">Delete</button></div></div></div>`);
+                            <button type="button" class="btn btn-secondary editBtn">Edit</button>
+                            <button type="button" class="btn btn-secondary deleteBtn">Delete</button></div></div></div>`);
       },
       error:function(err){
         console.log(err);
@@ -118,7 +119,7 @@ $('#addWorkItemBtn').click(function(){
 
 $('#workList').on('click', '.editBtn', function() {
   event.preventDefault();
-  if (!sessionStorage.userId) {
+  if (!sessionStorage.userID) {
     alert('401, permission denied');
     return;
   }
@@ -127,7 +128,7 @@ $('#workList').on('click', '.editBtn', function() {
     url: `${url}/work/${id}`,
     type: 'post',
     data: {
-      userId: sessionStorage.userId
+      userId: sessionStorage.userID
     },
     dataType: 'json',
     success:function(work){
