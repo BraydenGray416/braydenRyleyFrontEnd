@@ -152,10 +152,6 @@ $('#addWorkItemBtn').click(function(){
 
 $('#workList').on('click', '.editBtn', function() {
   event.preventDefault();
-<<<<<<< HEAD
-=======
-
->>>>>>> braydenDev
   if (!sessionStorage.userID) {
     alert('401, permission denied');
     return;
@@ -166,11 +162,7 @@ $('#workList').on('click', '.editBtn', function() {
     url: `${url}/work/${id}`,
     type: 'post',
     data: {
-<<<<<<< HEAD
-      userId: sessionStorage.userID
-=======
       userID: sessionStorage.userID
->>>>>>> braydenDev
     },
     dataType: 'json',
     success:function(result){
