@@ -28,8 +28,8 @@ showWorkCards = () => {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
 
-        let workCard = `<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center" data-id=${data[i]._id}>
-                        <div class="card h-100">
+        let workCard = `<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center">
+                        <div class="card h-100 workItem" data-id="${data[i]._id}">
                         <div class="card-body">
                           <img src="${data[i].imageUrl}" class="card-img-top" alt="">
                           <h5 class="card-title">${data[i].title}</h5>
@@ -83,6 +83,38 @@ $('#addWorkItemBtn').click(function(){
   }else if(workURL.length === 0){
     console.log('Please give a URL for this project');
   }else {
+    if(editing === true){
+      const id = $('#workID').val();
+      $.ajax({
+        url: `${url}/product/${id}`,
+        type: 'PATCH',
+        data: {
+          name: productName,
+          price: productPrice,
+          userId: sessionStorage.userId
+        },
+        success:function(result){
+          console.log(result);
+          $('#workTitleInput').val(null);
+          $('#workImageURLInput').val(null);
+          $('#workAuthorInput').val(null);
+          $('#workURLInput').val(null);
+          $('#addProductButton').text('Submit').removeClass('btn-warning');
+          $('#heading').text('Add Work');
+          editing = false;
+          const allWork = $('.workItem');
+          allProducts.each(function(){
+            if($(this).data('id') === id){
+              $(this).find('.productName').text(productName);
+            }
+          });
+        },
+        error: function(err){
+          console.log(err);
+          console.log('something went wront with editing the product');
+        }
+      });
+    } else {
     $.ajax({
       url: `${url}/addWorkItem`,
       type: 'POST',
@@ -91,7 +123,7 @@ $('#addWorkItemBtn').click(function(){
         imageUrl: workImageURL,
         author: workAuthor,
         url: workURL,
-        userId: sessionStorage.userID
+        userID: sessionStorage.userID
       },
       success:function(result){
         $('#workTitleInput').val(null);
@@ -100,7 +132,7 @@ $('#addWorkItemBtn').click(function(){
         $('#workURLInput').val(null);
         console.log(sessionStorage.userID);
           $('#workList').append(`<div class="col-12 col-sm-6 col-md-4 mb-3 mt-3 text-center">
-                          <div class="card h-100">
+                          <div class="card h-100 workItem" data-id="${result._id}">
                           <div class="card-body">
                             <img src="${result.imageUrl}" class="card-img-top" alt="">
                             <h5 class="card-title">${result.title}</h5>
@@ -115,29 +147,39 @@ $('#addWorkItemBtn').click(function(){
       }
     });
   }
+}
 });
 
 $('#workList').on('click', '.editBtn', function() {
   event.preventDefault();
+<<<<<<< HEAD
+=======
+
+>>>>>>> braydenDev
   if (!sessionStorage.userID) {
     alert('401, permission denied');
     return;
   }
   const id = $(this).parent().parent().data('id');
+  console.log(id);
   $.ajax({
     url: `${url}/work/${id}`,
     type: 'post',
     data: {
+<<<<<<< HEAD
       userId: sessionStorage.userID
+=======
+      userID: sessionStorage.userID
+>>>>>>> braydenDev
     },
     dataType: 'json',
-    success:function(work){
-      console.log(work);
-      $('#workTitleInput').val(work.name);
-      $('#workImageURLInput').val(work.imageUrl);
-      $('#workAuthorInput').val(work.author);
-      $('#workURLInput').val(work.url);
-      $('#workID').val(work._id);
+    success:function(result){
+      console.log(result);
+      $('#workTitleInput').val(result.title);
+      $('#workImageURLInput').val(result.imageUrl);
+      $('#workAuthorInput').val(result.author);
+      $('#workURLInput').val(result.url);
+      $('#workID').val(result._id);
       $('#addWorkItemBtn').text('Edit Work').addClass('btn-warning');
       $('#heading').text('Edit Work');
       editing = true;
